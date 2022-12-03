@@ -38,7 +38,7 @@ export function ReviewForm() {
           name="comment"
           id="comment"
           placeholder="Conte como foi a sua experiência com o produto..."
-          
+          required
         ></textarea>
       </div>
     </div>
