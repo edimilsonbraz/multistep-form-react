@@ -1,4 +1,4 @@
-export function UserForm() {
+export function UserForm({data, updateFieldHandle}) {
   return (
     <div>
       <div className="form-control">
@@ -9,6 +9,8 @@ export function UserForm() {
           id="name"
           placeholder="Digite o seu nome"
           required
+          value={data.name || ""}
+          onChange={(e) => updateFieldHandle("name", e.target.value)}
         />
       </div>
       <div className="form-control">
@@ -19,6 +21,8 @@ export function UserForm() {
           id="email"
           placeholder="Digite o seu email"
           required
+          value={data.email || ""}
+          onChange={(e) => updateFieldHandle("email", e.target.value)}
         />
       </div>
     </div>

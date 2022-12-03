@@ -6,12 +6,32 @@ import { Thanks } from './components/Thanks'
 import { UserForm } from './components/userForm'
 import { Steps } from './components/Steps'
 //hooks
+import { useState } from 'react'
 import { useForm } from './hooks/useForm'
 
 import './App.css'
 
+const formTemplate = {
+  name: '',
+  email: '',
+  review: '',
+  comment: ''
+}
+
 export function App() {
-  const formComponents = [<UserForm />, <ReviewForm />, <Thanks />]
+  const [data, setData] = useState(formTemplate)
+
+  function updateFieldHandle(key, value) {
+    setData((prev) => {
+      return{...prev, [key]:value}
+    });
+  } 
+
+  const formComponents = [
+    <UserForm data={data} updateFieldHandle={updateFieldHandle}/>,
+    <ReviewForm data={data} updateFieldHandle={updateFieldHandle}/>,
+    <Thanks data={data} />
+  ]
 
   const { currentStep, currentComponent, changeStep, isFirstStep, isLastStep } =
     useForm(formComponents)
@@ -45,7 +65,6 @@ export function App() {
               <button type="submit">
                 <span>Enviar</span>
                 <FiSend />
-                <GrFormNext />
               </button>
             )}
           </div>
